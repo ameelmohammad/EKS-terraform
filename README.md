@@ -120,7 +120,7 @@ provider "aws" {
   }
 
 
- #Adding security group
+ # Adding security group
   resource "aws_security_group" "allow_tls" {
     name_prefix   = "allow_tls_"
     description   = "Allow TLS inbound traffic"
@@ -142,7 +142,7 @@ provider "aws" {
     }
   }
 
- #Creating IAM role for EKS
+ # Creating IAM role for EKS
   resource "aws_iam_role" "master" {
     name = "ed-eks-master"
 
@@ -255,7 +255,7 @@ provider "aws" {
     role       = aws_iam_role.worker.name
   }
 
- #Creating EKS Cluster
+ # Creating EKS Cluster
   resource "aws_eks_cluster" "eks" {
     name     = "pc-eks"
     role_arn = aws_iam_role.master.arn
@@ -274,7 +274,7 @@ provider "aws" {
       aws_iam_role_policy_attachment.AmazonEKSVPCResourceController,
     ]
   }
-
+# instance
   resource "aws_instance" "kubectl-server" {
     ami                         = "ami-0f5ee92e2d63afc18"  # Replace with a valid AMI ID for ap-south-1 region
     key_name                    = "mumbai-kp"  # Make sure the key pair exists in ap-south-1 region
@@ -287,7 +287,7 @@ provider "aws" {
       Name = "kubectl"
     }
   }
-
+# eks node
   resource "aws_eks_node_group" "node-grp" {
     cluster_name    = aws_eks_cluster.eks.name
     node_group_name = "pc-node-group"
